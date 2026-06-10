@@ -24,7 +24,7 @@ After running this once, you can do:
 All dependency pulls happen only on first run (or if you delete .venv).
 Subsequent runs do fast import + version checks.
 
-Run this from the new_thing/ root:
+Run this from the PQCassets/ root:
     python3 setup.py
 """
 
@@ -253,7 +253,7 @@ def print_final_instructions():
 
     {activate_cmd}
     python3 -m keygen.unified_sphinx_keygen
-    python3 new_thing.py
+    python3 PQCassets.py
     python3 wallet/btc_checker.py          # GUI
     python3 fusion/fusion_hash.py
     python3 utils/chain_fusion_tool.py --help
@@ -262,7 +262,7 @@ def print_final_instructions():
 Re-run {BOLD}python3 setup.py{RESET} anytime to verify or repair.
 
 {BOLD}Next (Phase 1+):{RESET}
-- Copy your full sphincs-btc-pipeline/ and sphincs_bch_hybrid/ folders into new_thing/pqc/
+- Copy your full sphincs-btc-pipeline/ and sphincs_bch_hybrid/ folders into PQCassets/pqc/
 - Start building real keys, mint SVC coins, run the checker GUI, etc.
 
 Enjoy the hybrid PQC + confidential SVC system! 🚀

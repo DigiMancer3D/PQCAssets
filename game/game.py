@@ -10,10 +10,10 @@ from pathlib import Path
 import sys
 
 # === Correct Path Handling (works when running from game/ folder) ===
-GAME_DIR = Path(__file__).resolve().parent          # This is new_thing/game/
-PROJECT_ROOT = GAME_DIR.parent                      # This is new_thing/
+GAME_DIR = Path(__file__).resolve().parent          # This is PQCassets/game/
+PROJECT_ROOT = GAME_DIR.parent                      # This is PQCassets/
 
-# Add the new_thing root to Python path so we can import game_integration, wallet, seeds, etc.
+# Add the PQCassets root to Python path so we can import game_integration, wallet, seeds, etc.
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 

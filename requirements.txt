@@ -1,0 +1,14 @@
+# New_Thing - Phase 0 Auto-Installer Requirements
+# These will be installed into the project .venv
+# Run: python3 setup.py   (or python setup.py)
+
+coincurve>=0.21.0
+cryptography>=42.0.0
+requests>=2.31.0
+base58>=2.1.1
+
+# Optional but recommended for future GUI/game assets
+# pillow>=10.0.0
+
+# maturin is installed on-demand by setup.py when building the Rust extension
+# Do not list maturin here to avoid forcing it if user doesn't need Bulletproofs yet

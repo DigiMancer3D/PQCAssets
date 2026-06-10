@@ -26,17 +26,17 @@ from datetime import datetime, timezone
 
 # ==================== CONFIG ====================
 PAH_BINARY = None
-DEFAULT_OUTPUT_DIR = Path.home() / "new_thing" / "pqc_assets"
+DEFAULT_OUTPUT_DIR = find_project_root()  # was Path.home() / "PQCassets" / "pqc_assets"
 DEFAULT_ALGORITHM = "falcon"
 
 
 def find_pah_binary():
     """Robust finder for the pah binary"""
     candidates = [
-        Path.home() / "new_thing" / "pah" / "pah",
+        find_project_root()  # was Path.home() / "PQCassets" / "pah" / "pah",
         Path.cwd().parent / "pah" / "pah",
         Path.cwd() / "pah" / "pah",
-        Path("/home/z0m8i3d/new_thing/pah/pah"),
+        Path("/home/z0m8i3d/PQCassets/pah/pah"),
     ]
     for c in candidates:
         if c.exists() and os.access(c, os.X_OK):

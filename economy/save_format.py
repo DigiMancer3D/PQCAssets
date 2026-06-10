@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 def _find_pah_binary() -> Optional[str]:
     """Reuse robust finder logic"""
     candidates = [
-        os.path.expanduser("~/new_thing/pah/pah"),
+        os.path.expanduser("~/PQCassets/pah/pah"),
         os.path.join(os.getcwd(), "..", "pah", "pah"),
         os.path.join(os.getcwd(), "pah", "pah"),
     ]

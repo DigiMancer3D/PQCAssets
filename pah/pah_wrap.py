@@ -22,6 +22,31 @@ SUPPORTED_ALGORITHMS = ["falcon", "sphincs", "hybrid"]
 
 PAH_BINARY = None
 
+def parse_human_size(size_str: str) -> int:
+    """Convert human-readable size (e.g. 100M, 500MB, 2G) to bytes."""
+    size_str = size_str.strip().upper().replace(" ", "")
+    multipliers = {
+        'K': 1024,
+        'KB': 1024,
+        'M': 1024**2,
+        'MB': 1024**2,
+        'G': 1024**3,
+        'GB': 1024**3,
+        'T': 1024**4,
+        'TB': 1024**4,
+    }
+    for suffix, mult in multipliers.items():
+        if size_str.endswith(suffix):
+            try:
+                num = float(size_str[:-len(suffix)])
+                return int(num * mult)
+            except ValueError:
+                pass
+    # Assume bytes if no suffix
+    try:
+        return int(size_str)
+    except ValueError:
+        raise ValueError(f"Invalid size format: {size_str}")
 
 def find_pah_binary() -> str:
     global PAH_BINARY
@@ -255,6 +280,69 @@ def verify_wrapped_file(path: Path) -> bool:
     except:
         return False
 
+def verify_container(container_path: Path, quiet: bool = False) -> bool:
+    container_path = container_path.resolve()
+    if not container_path.exists():
+        print(f"ERROR: File not found: {container_path}")
+        return False
+
+    print(f"\n🔍 Verifying: {container_path.name}")
+
+    try:
+        with open(container_path, "rb") as f:
+            magic = f.read(4)
+            if magic != b"PAH1":
+                print("❌ Invalid magic bytes (not a PAH container)")
+                return False
+
+            version = int.from_bytes(f.read(4), "little")
+            entry_count = int.from_bytes(f.read(4), "little")
+
+            print(f"   Type: Multi-Asset Container | Version: {version} | Entries: {entry_count}")
+
+            valid = 0
+            invalid = 0
+
+            for i in range(entry_count):
+                try:
+                    sig_len = int.from_bytes(f.read(4), "little")
+                    data_len = int.from_bytes(f.read(4), "little")
+                    name_len = int.from_bytes(f.read(4), "little")
+
+                    if sig_len == 0 or data_len == 0 or name_len == 0:
+                        invalid += 1
+                        f.read(sig_len + data_len + name_len)
+                        continue
+
+                    raw_name = f.read(name_len)
+                    filename = raw_name.split(b"\x00")[0].decode("utf-8", errors="ignore")
+
+                    f.read(sig_len)  # skip signature
+                    f.read(data_len)  # skip data
+
+                    if filename:
+                        valid += 1
+                        if not quiet:
+                            print(f"   ✅ [{i}] {filename}  (sig: {sig_len}, data: {data_len})")
+                    else:
+                        invalid += 1
+
+                except Exception:
+                    invalid += 1
+                    break
+
+            print(f"\n   Result: {valid} valid | {invalid} invalid")
+
+            if invalid == 0:
+                print("✅ Container verification passed")
+                return True
+            else:
+                print("⚠️  Container has some invalid entries")
+                return False
+
+    except Exception as e:
+        print(f"❌ Verification failed: {e}")
+        return False
 
 def extract_wrapped_file(wrapped_path: Path, output_dir: Path):
     wrapped_path = wrapped_path.resolve()
@@ -391,6 +479,54 @@ def split_container(container_path: Path, num_parts: int, output_prefix: str, al
     print(f"\n✅ Split into {len(created)} containers")
     return created
 
+def split_container_by_size(container_path: Path, target_size_str: str, output_prefix: str, algorithm: str = "hybrid"):
+    container_path = container_path.resolve()
+    if not container_path.exists():
+        print(f"ERROR: Container not found: {container_path}")
+        return False
+
+    target_size = parse_human_size(target_size_str)
+    print(f"Splitting by approximate size: {target_size_str} ({target_size} bytes)")
+
+    temp_dir = Path(tempfile.mkdtemp(prefix="pqc_split_size_"))
+    if not smart_extract(container_path, temp_dir):
+        shutil.rmtree(temp_dir, ignore_errors=True)
+        return False
+
+    all_files = sorted([f for f in temp_dir.iterdir() if f.is_file()], key=lambda x: x.stat().st_size, reverse=True)
+
+    groups = []
+    current_group = []
+    current_size = 0
+
+    for f in all_files:
+        file_size = f.stat().st_size
+        if current_size + file_size > target_size and current_group:
+            groups.append(current_group)
+            current_group = []
+            current_size = 0
+        current_group.append(f)
+        current_size += file_size
+
+    if current_group:
+        groups.append(current_group)
+
+    created = []
+    for idx, group in enumerate(groups, 1):
+        part_name = f"{output_prefix}_part{idx}"
+        part_container = container_path.parent / f"{part_name}.pqcasset"
+
+        run_pah([find_pah_binary(), "--create-container", str(part_container)])
+        for file in group:
+            run_pah([find_pah_binary(), "--add-to-container", str(part_container), str(file)])
+
+        created.append(part_container)
+        total_size = sum(f.stat().st_size for f in group)
+        print(f"  Created: {part_container.name} ({len(group)} files, ~{total_size / (1024**2):.1f} MB)")
+
+    shutil.rmtree(temp_dir, ignore_errors=True)
+    print(f"\n✅ Split into {len(created)} containers by size")
+    return created
 
 def clean_stacked_files(directory: Path = Path("pqc_wrapped")):
     directory = directory.resolve()
@@ -436,6 +572,9 @@ def main():
     parser.add_argument("--output-prefix", help="Prefix for split parts")
     parser.add_argument("--clean-stacked", action="store_true")
 
+    parser.add_argument("--split-size", help="Split by approximate size (e.g. 100M, 500MB, 2G)")
+    parser.add_argument("--verify", action="store_true", help="Verify container or file integrity")
+
     args = parser.parse_args()
 
     if args.clean_stacked:
@@ -452,10 +591,28 @@ def main():
             smart_extract(Path(args.input), args.output_dir)
         return
 
+    if args.split_size:
+        if args.input:
+            prefix = args.output_prefix or Path(args.input).stem
+            split_container_by_size(Path(args.input), args.split_size, prefix, args.algorithm)
+        return
+
     if args.split:
         if args.input:
             prefix = args.output_prefix or Path(args.input).stem
             split_container(Path(args.input), args.split, prefix, args.algorithm)
+        return
+
+    if args.verify:
+        if args.input:
+            input_path = Path(args.input).resolve()
+            if is_multi_container(input_path):
+                verify_container(input_path, quiet=args.quiet)
+            else:
+                if verify_wrapped_file(input_path):
+                    print(f"✅ Single wrapped file is structurally valid: {input_path.name}")
+                else:
+                    print(f"❌ Single wrapped file failed verification: {input_path.name}")
         return
 
     if not args.input:

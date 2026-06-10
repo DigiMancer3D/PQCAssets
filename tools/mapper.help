@@ -1,0 +1,54 @@
+=====================================
+           MAPPER HELP
+=====================================
+
+
+::WORLD BASICS::
+-------------------------------------
+
+
+
+::WROLD DATA::
+-------------------------------------
+
+
+
+::GENERATION CONTROLS::
+-------------------------------------
+
+
+
+::DETAILS::
+-------------------------------------
+
+
+
+::ARC BUILDER::
+-------------------------------------
+
+
+
+::MAP EDITOR::
+-------------------------------------
+
+
+
+::ARCS INTEGRATION::
+-------------------------------------
+
+
+
+::FILE OPERATIONS::
+-------------------------------------
+
+
+
+::DOOR CONNECTIONS::
+-------------------------------------
+Use symbols: +=Door, -=Non-Interactive, L=Ladder, H=Hole, R=Rope, Q/I=Waypoints.
+Follow door.guide for exit->entrance.
+Waypoints: Q (home, many connects), I (instance, 1 connect).
+
+=====================================
+  !See symbols/phrases for options!
+=====================================

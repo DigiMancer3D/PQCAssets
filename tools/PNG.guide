@@ -1,0 +1,118 @@
+# PNG SIZES GUIDE
+
+### These are the sprite & *.png image sizes guide for adding in or modifying to formulate your unqiue experienced game play. Setting a /Campaigns/ folder to store the campaign names as folders to then store the /Sprites/ internal data so you can quickly swap between different campaigns by sprite change. TOAST & TOAST Boss Sim are designed to use the /Sprites/ folder to expand past the inital failsafe of text, poly, simple geomtry for the entire in-game elements incuding: usable objects, findable objects, characters, enemies, NPCs, etc.
+
+
+### Each sectional header contains Range of allowed .png sizes for what is specially named; the Default size (also marked by wrapping '*' in the list); the name scheme for what is speically named; the folder in which the png for what is specially named will be found.
+
+
+#### {sprite_type} [min-max range: {{min_range} - {max_range}}; Default: {default_size};] ({naming_scheme [if plain text & not '{' '}' wrapped, a specific name is looked for]} == {naming_scheme [if there are two naming_schemes listed, this second one is the fallback]}) /{directory_location}/
+---
+
+
+
+
+# TOAST Engine
+---
+
+## Splash Screen [min-max range: {800x800 - 1200x930}; Default: 1200x930;] (splash_screen.png == {ui_element}_{ui_location}.png) /Sprites/
+ - 1221x936 (technically allowed)
+ - *1200x930 (inital starting size)*
+ - 800x800 (padded starting size)
+ - 640x640 (big credit)
+ - 400x400 (small credit)
+ - 250x250 (technically allowed)
+
+## DIY Character [min-max range: {1x1 - 1042x1042}; Default: 128x128;] ({character-name}_{starting-facing-direction}.png) /Sprites/Characters/
+ - 1042x1024 (technically allowed)
+ - 840x840 (breaks collisions)
+ - 512x512 (over-sized)
+ - 256x256 (chonky)
+ - *128x128 (best fit)*
+ - 84x84 (prefered)
+ - 64x64 (usable)
+ - 48x48 (under-sized)
+ - 67-x67- (???)
+
+
+## Interactive Objects [min-max range: {1x1 - 1042x1042}; Default: 256x256;] ({objectname}.png) /Sprites/
+ - 1024x1024 (mega-boss sized)
+ - 420x420 (loud)
+ - *256x256 (best fit)*
+ - 128x128 (prefered)
+ - 84x84 (usable)
+ - 83-x83- (???)
+
+
+## Directional Arrows [min-max range: {1x1 - 1042x1042}; Default: 48x48;] ({directionphrase}_arrow.png) /Sprites/
+ - 84x84 (currently used for edges [special case])
+ - 73x73 (currently used for corners [special case])
+ - 52x52 (breaks past program edge)
+ - 50x50 (largest possible)
+ - *48x48 (best fit)*
+ - 40x40 (prefered)
+ - 32x32 (usable)
+ - 28x28 (under-sized)
+ - 20x20 (decently small)
+ - 16x16 (crazy small)
+ - 10x10 (smallest viewable)
+ - 5x5 (smallest possible)
+ - 4x4 (debatable if usable)
+ - 1x2 (a line)
+ - 1x1 (technically allowed)
+
+## TLA Row Identifiers  [min-max range: {1x1 - 1042x1042}; Default: 64x64;] ({rowtitle}_tla.png)  /Sprites/
+ - 1024x1024 (technically allowed)
+ - 77x77 (breaks past program edge)
+ - 70x70 (breaks limits)
+ - 68x68 (largest possible)
+ - *64x64 (best fit)*
+ - 52x52 (prefered)
+ - 48x48 (usable)
+ - 32x32 (under-sized)
+ - 28x28 (smallest viewable)
+ - 24x24 (smallest possible)
+ - 1x1 (technically allowed)
+
+## Inventory & Safe Tab Icons  [min-max range: {1x1 - 1042x1042}; Default: 42x42;] ({tab-first-letter}_tab.png)  /Sprites/
+ - 1024x1024 (technically allowed)
+ - 68x68 (breaks limits)
+ - 61x61 (largest possible)
+ - *42x42 (best fit)*
+ - 36x36 (prefered)
+ - 28x28 (usable)
+ - 22x22 (under-sized)
+ - 1x1 (technically allowed)
+
+## BPack & Equip Icons  [min-max range: {1x1 - 1042x1042}; Default: 42x42;] ({title}.png)  /Sprites/
+ - 1024x1024 (technically allowed)
+ - 72x72 (breaks limits)
+ - 64x64 (largest possible)
+ - *42x42 (best fit)*
+ - 36x36 (prefered)
+ - 28x28 (usable)
+ - 22x22 (under-sized)
+ - 1x1 (technically allowed)
+
+## Usables [min-max range: {1x1 - 1042x1042}; Default: 128x128;] ({usable-name}_{quality-value}.png) /Sprites/
+ - 1042x1024 (technically allowed)
+ - 840x840 (breaks collisions)
+ - 512x512 (over-sized)
+ - 256x256 (chonky)
+ - *128x128 (best fit)*
+ - 84x84 (prefered)
+ - 64x64 (usable)
+ - 48x48 (under-sized)
+ - 1x1 (technically allowed)
+
+## Aim Dot [min-max range: {1x1 - 1042x1042}; Default: 68x68;] ({aim-dot-name}.png) /Sprites/
+ - 1042x1024 (technically allowed)
+ - 128x128 (over-sized)
+ - 84x84 (chonky)
+ - *68x68 (best fit)*
+ - 62x62 (prefered)
+ - 48x48 (usable)
+ - 32x32 (under-sized)
+ - 1x1 (technically allowed)
+
+ ---

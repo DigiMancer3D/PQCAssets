@@ -1,0 +1,51 @@
+=====================================
+        MINI-MAP GUIDE
+=====================================
+
+
+::MINI-MAP BASICS::
+-------------------------------------
+Toggle: Click "Mini-Map" button.
+Layout: Maps as yellow squares in grid.
+Footer: RND (randomize), Refresh, Cancel, X.
+Squares: Represent map tabs; green border on current.
+
+
+::DOTS & OPENINGS::
+-------------------------------------
+7 Dots/Square: Positions T/R/B/L/IL/IC/IR.
+Colors:
+  - Black: Default opening.
+  - Orange: Waypoint (5).
+  - Green: Connected.
+Openings Code: 7 chars (0-5); sets dot types.
+
+
+::CONNECTIONS::
+-------------------------------------
+Lines: Between dots; colors by type (black/gold/green/red/blue).
+Compatibility: Per door.guide; waypoints (5) to 0/4/5.
+Waypoint Rules:
+  - 'Q' Home: Many instance connects.
+  - 'I' Instance: 1 connect (home/instance).
+Randomize: Linear random between maps if compatible.
+
+
+::INTERACTIONS::
+-------------------------------------
+Left-Click Dot: Select (blue); click another to connect/disconnect.
+Right-Click Dot: Deconnect.
+Hover Dot: Red self; cyan compatibles; red lines.
+Right-Click Square: Switch to map tab.
+Refresh: Regenerate layout.
+
+
+::NOTES::
+-------------------------------------
+- Connections saved in .mapd (;connections::).
+- Use with openings/symbols ('Q'/'I') for teleporters.
+- Validate per rules; no invalid lines.
+
+=====================================
+  Visualize & connect maps easily.
+=====================================

@@ -1,0 +1,72 @@
+=====================================
+           MAP HELP
+=====================================
+
+
+::MAP BASICS::
+-------------------------------------
+New Map: Add tab (default 48x24).
+Openings: 7-digit (0-5); edges + center.
+  - 0=none, 1=open, 2=door, 3=unit (rope/hole/ladder), 4=non-interactive, 5=waypoint.
+Width/Height: 0-1080; apply resizes.
+Type: Safe/Crawl/Fight/Mix0-3/Mixed.
+Name: Title (max 28 chars).
+Maker: Creator (max 21 chars).
+System: Auto "PB [no-jam] PyEditor".
+
+
+::SYMBOL PLACEMENT::
+-------------------------------------
+Select: From list; left-click place.
+Select Mode: -- for props/multi-select.
+Right-Click: Remove (to space)/select.
+Multi-Select: Drag; edit region.
+Lock Apply: Auto-apply on matches.
+
+
+::PROPERTIES::
+-------------------------------------
+Color: Symbol text color.
+Texture: Visual string.
+Name: Custom.
+Value: Integer (0+).
+Depth: Integer (1+).
+Height: Integer (1+).
+3D: Checkbox for depth.
+Apply: To cell/region; menu clear.
+
+
+::EDIT OPERATIONS::
+-------------------------------------
+Copy/Cut/Paste: Region.
+Replace: Symbols to current.
+New Map: From region.
+Clear Props: Reset in region.
+Remove: Clear symbols/props.
+Undo/Redo: Grid changes.
+
+
+::ARCS INTEGRATION::
+-------------------------------------
+Attached: Green dots; click to load.
+Load to Map: Attach.
+Save from Map: Export attached.
+
+
+::FILE OPERATIONS::
+-------------------------------------
+Save .tmap: Single map + props/arcs.
+Save .mapd: Dict with imports + arcs.
+Load .tmap/.txt: Single.
+Load .mapd: Multi-maps + arcs.
+
+
+::DOOR CONNECTIONS::
+-------------------------------------
+Use symbols: +=Door, -=Non-Interactive, L=Ladder, H=Hole, R=Rope, Q/I=Waypoints.
+Follow door.guide for exit->entrance.
+Waypoints: Q (home, many connects), I (instance, 1 connect).
+
+=====================================
+  !See symbols/phrases for options!
+=====================================

@@ -1,0 +1,126 @@
+=====================================
+       DOOR TRANSVERSAL GUIDE
+=====================================
+
+
+::QUICK REFERENCES::
+-------------------------------------
+
+
+Door Types (# (type, open/closed)):
+0 (no door, closed)
+1 (no-door, open)
+2 (door, open)
+3 (rope/hole/ladder, open)
+4 (non-interactive door, closed)
+5 (waypoint, waypoint)
+
+
+Key:
+**no door ==> a door cannot be used**
+**door ==> a door will be used**
+**rope ==> a rope will be used**
+**hole ==> a hole will be used**
+**ladder ==> a ladder will be used**
+**hole-in-ground ==> hole pieces in map (desginated ground piece)**
+**rope/hole/ladder ==> a rope, hole, hole-in-ground, ladder may be used**
+**non-interactive door ==> a door will be used (may be a special looking door; will be inactive when not in use)**
+**open ==> user can interact to use**
+**closed ==> user doesn't directly interact to use**
+**waypoint ==> user must interact with a side to use**
+
+-------------------------------------
+
+
+Transversal Array (explained):
+---- => TOP,RIGHT,BOTTOM,LEFT {map edge doorways}
+--- => INNER-LEFT,INNER-CENTER,INNER-RIGHT {inner map pathways}
+------- ==> T,R,B,L,IL,IC,IR {full transversal array}
+
+
+Allowed Transversal {EXIT -> ENTER}:
+X------ -> --X-XXX
+-X----- -> ---XXXX
+--X---- -> X---XXX
+---X--- -> -X--XXX
+----X-- -> XXXXXXX
+-----X- -> XXXXXXX
+------X -> XXXXXXX
+
+
+Allowed Door-Pass {DOOR EXIT(DOOR ENTER,...,DOOR ENTER)}:
+0(N/A,5,4); 1(1,3,0,4,5); 2(1,2,4,5); 3(1,3,0,4,5); 4(1,2,3,0,4,5); 5(0,5,4,1,2,3)
+
+-------------------------------------
+
+
+::VISUAL REFERENCES::
+-------------------------------------
+
+
+Opening -> Others:
+ 1--- -> --1- (left exit -> right entrance)
+ -1-- -> ---1 (top exit -> bottom entrance)
+ --1- -> 1--- (right exit -> left entrance)
+ ---1 -> -1-- (bottom exit -> top entrance)
+ 1--- -> --3- (left exit -> right entrance)
+ -1-- -> ---3 (top exit -> bottom entrance)
+ --1- -> 3--- (right exit -> left entrance)
+ ---1 -> -3-- (bottom exit -> top entrance)
+
+
+Door -> Others:
+ 2--- -> --1- (left exit -> right entrance)
+ -2-- -> ---1 (top exit -> bottom entrance)
+ --2- -> 1--- (right exit -> left entrance)
+ ---2 -> -1-- (bottom exit -> top entrance)
+ 2--- -> --2- (left exit -> right entrance)
+ -2-- -> ---2 (top exit -> bottom entrance)
+ --2- -> 2--- (right exit -> left entrance)
+ ---2 -> -2-- (bottom exit -> top entrance)
+
+
+Non-Door-Transversal-Unit -> Others:
+ 3--- -> --1- (left exit -> right entrance)
+ -3-- -> ---1 (top exit -> bottom entrance)
+ --3- -> 1--- (right exit -> left entrance)
+ ---3 -> -1-- (bottom exit -> top entrance)
+ 3--- -> --3- (left exit -> right entrance)
+ -3-- -> ---3 (top exit -> bottom entrance)
+ --3- -> 3--- (right exit -> left entrance)
+ ---3 -> -3-- (bottom exit -> top entrance)
+
+
+Non-Interactive Door -> Others:
+ 4--- -> --1- (left exit -> right entrance)
+ -4-- -> ---1 (top exit -> bottom entrance)
+ --4- -> 1--- (right exit -> left entrance)
+ ---4 -> -1-- (bottom exit -> top entrance)
+ 4--- -> --2- (left exit -> right entrance)
+ -4-- -> ---2 (top exit -> bottom entrance)
+ --4- -> 2--- (right exit -> left entrance)
+ ---4 -> -2-- (bottom exit -> top entrance)
+ 4--- -> --3- (left exit -> right entrance)
+ -4-- -> ---3 (top exit -> bottom entrance)
+ --4- -> 3--- (right exit -> left entrance)
+ ---4 -> -3-- (bottom exit -> top entrance)
+
+
+Waypoint -> Others:
+ 5--- -> --0- (left exit -> right entrance)
+ -5-- -> ---0 (top exit -> bottom entrance)
+ --5- -> 0--- (right exit -> left entrance)
+ ---5 -> -0-- (bottom exit -> top entrance)
+ 5--- -> --4- (left exit -> right entrance)
+ -5-- -> ---4 (top exit -> bottom entrance)
+ --5- -> 4--- (right exit -> left entrance)
+ ---5 -> -4-- (bottom exit -> top entrance)
+ 5--- -> --5- (left exit -> right entrance)
+ -5-- -> ---5 (top exit -> bottom entrance)
+ --5- -> 5--- (right exit -> left entrance)
+ ---5 -> -5-- (bottom exit -> top entrance)
+
+=====================================
+  Use for consistent map connections.
+  Waypoints (5) now connect to 0/4/5.
+=====================================

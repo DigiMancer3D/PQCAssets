@@ -1,0 +1,47 @@
+=====================================
+            TLDR GUIDE
+=====================================
+
+
+::KEY FEATURES::
+-------------------------------------
+Map Creation: Grid editor with symbols.
+Symbol Placement: Select + left-click.
+Properties: Color/texture/name/value/etc.
+Arc Builder: Story/events linked to maps.
+Multi-Select: Drag for copy/cut/paste.
+Undo/Redo: Grid + arc edits.
+Preview: Map/dictionary views.
+Import/Export: .tmap/.mapd/.arcs.
+
+
+::SHORTCUTS::
+-------------------------------------
+Tab: Cycle sections (symbols/arcs/etc.).
+Shift-Tab: Next listbox item.
+Ctrl+Return: Right-click at mouse.
+W/A/S/D/Arrows: Scroll canvas.
+Wheel: Vertical scroll.
+Shift+Wheel: Horizontal scroll.
+Page Up/Down: Page vertical.
+Left Click: Place/start select.
+Right Click: Remove/select cell.
+Lock Apply: Batch on symbols.
+Esc: Deselect/cancel.
+
+
+::TIPS::
+-------------------------------------
+Lock for batch props.
+Attach arcs for stories.
+Script Gen: Inject enemy/NPC data.
+Phrases: Common arc terms.
+Door Guide: Connection rules.
+Arc Guide: Advanced scripting.
+Mini-Map: Connect maps visually.
+Waypoints: 'Q' home (many instances), 'I' instance (1 connection).
+Check files for lists/guides.
+
+=====================================
+  See map.help, arc.help, door.guide.
+=====================================

@@ -1,0 +1,13 @@
+Ways the word "level" is used to represent some amount of different tiered strucutre system:
+
+    - World Level is a general difficulty rating for the entire world
+    - Map Level is a z-axis height value
+    - Puzzle Level is a difficulty rating for the puzzle (0 is a single step puzzle, 1 is a multi-step puzzle, ... there is no value limit on puzzles but they only get harder as the number gets higher)
+    - Character Level is a player's character level based on experience gained
+    - User Level is a master level based on expereince gained from going to new Map Levels the user had not been to before (across all games) [used to keep track of last level reached; "{Lowest z-axis level seen}.{Highest z-axis leel seen}"; This makes a user level a dual-side ever increasing possible value so store the {highest z-axis seen} as a separate value as {lowest z-axis seen}]
+    - Skill Level is a skill's level based on use and experience the user gained from that skill use
+    - Stat Level is a stat's level based on use and experience the user gained from that stat use
+    - Zone Level is the amount of expereince possible per zone (0 = 100 exp max, 1 = 500 exp, 2 = 1000 exp, ..., higher zone level = more exp possible; no limit on zone level value)
+    - Ground Level is the starting level of the world (based on the inital map tile z-axis level; default is 0)
+    - Higher Level is a ground level rating above the Ground Level
+    - Lower Level is a ground level rating lower then the Ground Level

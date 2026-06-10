@@ -1,0 +1,20 @@
+{
+  "transactions": [
+    {
+      "txid": "a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef12345678",
+      "utxo": "a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef12345678:0",
+      "amount": 50000000,
+      "taproot_commitment": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890ab"
+    },
+    {
+      "txid": "b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456789a",
+      "utxo": "b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456789a:1",
+      "amount": 125000000,
+      "block_hash": "c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456789b"
+    }
+  ],
+  "metadata": {
+    "source": "test_data",
+    "note": "Sample with paired UTXO + amount for pipeline testing"
+  }
+}

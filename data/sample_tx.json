@@ -1,0 +1,10 @@
+{
+  "inputs": [["alice", 150000000]],
+  "outputs": [["bob", 100000000]],
+  "delta": 50000000,
+  "fee": 0,
+  "metadata": {
+    "tx_type": "test_payment",
+    "memo": "First CLI-created confidential transaction"
+  }
+}

@@ -72,7 +72,7 @@ def wrap_with_pah(input_path: str, algorithm: str = "falcon") -> str:
                     return cand
 
         # Your exact known location as last resort
-        exact = "/home/z0m8i3d/new_thing/pah/pah"
+        exact = "/home/z0m8i3d/PQCassets/pah/pah"
         if os.path.isfile(exact) and os.access(exact, os.X_OK):
             return exact
 
@@ -91,7 +91,7 @@ def wrap_with_pah(input_path: str, algorithm: str = "falcon") -> str:
             "Still cannot find the 'pah' binary.\n\n"
             "Current working directory: " + os.getcwd() + "\n\n"
             "Please run this command and send me the output:\n"
-            "python3 -c \"import os; print(os.getcwd()); print(os.path.exists('/home/z0m8i3d/new_thing/pah/pah'))\""
+            "python3 -c \"import os; print(os.getcwd()); print(os.path.exists('/home/z0m8i3d/PQCassets/pah/pah'))\""
         )
         return None
 

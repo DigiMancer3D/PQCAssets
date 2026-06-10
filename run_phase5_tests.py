@@ -3,10 +3,10 @@
 run_phase5_tests.py
 Correct runner for Phase 5 tests located in economy/tests/
 
-Place this file in ~/new_thing/
+Place this file in ~/PQCassets/
 
 Usage:
-    cd ~/new_thing
+    cd ~/PQCassets
     python3 run_phase5_tests.py
 """
 

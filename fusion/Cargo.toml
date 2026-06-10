@@ -1,0 +1,15 @@
+[package]
+name = "rust_bulletproofs"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "rust_bulletproofs"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.22", features = ["extension-module"] }
+bulletproofs = "4.0"
+curve25519-dalek-ng = "4.1"
+merlin = "3.0"
+rand = "0.8"

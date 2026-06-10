@@ -1,0 +1,97 @@
+cd ~/new_thing
+source .venv/bin/activate
+
+# === Core Keygen Tests ===
+python3 -m keygen.unified_sphinx_keygen
+python3 -m keygen.unified_sphinx_keygen --role 0
+python3 -m keygen.unified_sphinx_keygen --role 3 --no-shake --legacy-bch
+
+# Programmatic keygen test
+python3 -c "
+from keygen.unified_sphinx_keygen import generate_key_family
+f = generate_key_family(role=0)
+print('BTC:', f['families']['btc']['standard'])
+print('BCH:', f['families']['bch']['standard'])
+print('Classical Seed:', f['families']['classical_seed']['32_byte_classical_seed_hex'][:16])
+"
+
+# === Wallet Tests ===
+python3 tests/test_wallet_creation.py
+python3 test_compatible_kchain.py
+
+# NEW: Test User Secret seed method (once integrated)
+python3 -c "
+from wallet.wallet import Wallet
+w = Wallet()
+info = w.create(seed_method='user_secret', seed_data='MySuperSecretPassword123')
+print('User Secret Wallet Created:', info['wallet_id'])
+print('Role:', info['role'])
+w.save(compatible=True)
+print('Saved to wallets/')
+"
+
+# === Full System Sweep ===
+python3 tests/test_sweep.py
+
+# === FusionHash + SVC Tests ===
+python3 utils/chain_fusion_tool.py --help
+python3 utils/chain_fusion_tool.py --create-transaction --template svc_mint_from_kickback \
+  --kickback-amount 30000000 --dust-amount 5000000 --coin-id TEST-SWEEP
+
+# === Role + Master View Key Tests ===
+python3 -c "
+from roles.role_system import get_role_capabilities, get_master_view_key
+print('Role 0 Capabilities:', get_role_capabilities(0))
+print('Master View Key Example:', get_master_view_key('a' * 210)[:16] + '...')
+"
+
+# === ring_password.c CLI Test ===
+./tools/ring_password "ASecret123" #front test
+./tools/ring_password "MyTestPassword123" -o test_output.ssp
+cat test_output.ssp
+
+# === Run new_thing Demo ===
+python3 new_thing.py
+
+# === Test PQC Asset Handler (PAH) ===
+# == Wrap something ==
+./pah --wrap-falcon ../BTC_Checker.ico test.pqcasset
+
+# == Verify it ==
+./pah --verify test.pqcasset
+
+# == Create a blank container ==
+./pah --create-container emptyassets.pqcasset
+
+
+# == Add multiple files ==
+./pah --add-to-container emptyassets.pqcasset ../BTC_Checker.ico
+./pah --add-to-container emptyassets.pqcasset ../BTC_Checker.png
+./pah --add-to-container emptyassets.pqcasset ../requirements.txt
+./pah --list-container emptyassets.pqcasset
+
+# == Single Item testing ==
+./pah --wrap-sphincs ../BTC_Checker.ico sphincs_test.pqcasset
+./pah --list-container sphincs_test.pqcasset
+
+# == Hybrid Testing ==
+./pah --wrap-hybrid ../BTC_Checker.ico hybrid_test.pqcasset
+./pah --list-container hybrid_test.pqcasset
+
+
+
+# === PAH testing ===
+cd ~/new_thing/pah
+
+# == Verify the signature is valid ==
+./pah --verify /home/z0m8i3d/new_thing/pb/bsim/grill/test6.gif.pqcasset
+
+# == See details (signature size + original data size) ==
+./pah --list-container /home/z0m8i3d/new_thing/pb/bsim/grill/test6.gif.pqcasset
+
+
+# === Phase 5 (bsim integration) ===
+cd new_thing/economy
+
+python3 test_phase5_full_flow.py
+python3 test_bsim_bridge.py
